@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE817E1920E56E3C00B944AA /* Job.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE817E1820E56E3C00B944AA /* Job.swift */; };
 		EEA10AC220E53E380019B80C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA10AC120E53E380019B80C /* AppDelegate.swift */; };
 		EEA10AC420E53E380019B80C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA10AC320E53E380019B80C /* ViewController.swift */; };
 		EEA10AC720E53E380019B80C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA10AC520E53E380019B80C /* Main.storyboard */; };
 		EEA10AC920E53E3A0019B80C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA10AC820E53E3A0019B80C /* Assets.xcassets */; };
 		EEA10ACC20E53E3A0019B80C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA10ACA20E53E3A0019B80C /* LaunchScreen.storyboard */; };
+		EEA10AD420E540460019B80C /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA10AD320E540460019B80C /* ApiClient.swift */; };
+		EEA10ADA20E540B70019B80C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA10AD920E540B70019B80C /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE817E1820E56E3C00B944AA /* Job.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Job.swift; sourceTree = "<group>"; };
 		EEA10ABE20E53E380019B80C /* closure_enums_delegates.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = closure_enums_delegates.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA10AC120E53E380019B80C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA10AC320E53E380019B80C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		EEA10AC820E53E3A0019B80C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA10ACB20E53E3A0019B80C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA10ACD20E53E3A0019B80C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEA10AD320E540460019B80C /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		EEA10AD920E540B70019B80C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE817E1720E56DFD00B944AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EE817E1820E56E3C00B944AA /* Job.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		EEA10AB520E53E380019B80C = {
 			isa = PBXGroup;
 			children = (
@@ -55,13 +69,48 @@
 			isa = PBXGroup;
 			children = (
 				EEA10AC120E53E380019B80C /* AppDelegate.swift */,
-				EEA10AC320E53E380019B80C /* ViewController.swift */,
-				EEA10AC520E53E380019B80C /* Main.storyboard */,
+				EE817E1720E56DFD00B944AA /* Model */,
 				EEA10AC820E53E3A0019B80C /* Assets.xcassets */,
-				EEA10ACA20E53E3A0019B80C /* LaunchScreen.storyboard */,
+				EEA10AD520E5405D0019B80C /* Core */,
 				EEA10ACD20E53E3A0019B80C /* Info.plist */,
+				EEA10AD820E5409A0019B80C /* UI */,
+				EEA10AD620E5407A0019B80C /* ViewControllers */,
+				EEA10AD720E540890019B80C /* ViewModels */,
 			);
 			path = closure_enums_delegates;
+			sourceTree = "<group>";
+		};
+		EEA10AD520E5405D0019B80C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EEA10AD320E540460019B80C /* ApiClient.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EEA10AD620E5407A0019B80C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EEA10AC320E53E380019B80C /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		EEA10AD720E540890019B80C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EEA10AD920E540B70019B80C /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		EEA10AD820E5409A0019B80C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EEA10AC520E53E380019B80C /* Main.storyboard */,
+				EEA10ACA20E53E3A0019B80C /* LaunchScreen.storyboard */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +186,9 @@
 			files = (
 				EEA10AC420E53E380019B80C /* ViewController.swift in Sources */,
 				EEA10AC220E53E380019B80C /* AppDelegate.swift in Sources */,
+				EEA10ADA20E540B70019B80C /* ViewModel.swift in Sources */,
+				EEA10AD420E540460019B80C /* ApiClient.swift in Sources */,
+				EE817E1920E56E3C00B944AA /* Job.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +333,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9NM4DLTS84;
 				INFOPLIST_FILE = closure_enums_delegates/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -298,6 +351,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9NM4DLTS84;
 				INFOPLIST_FILE = closure_enums_delegates/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
