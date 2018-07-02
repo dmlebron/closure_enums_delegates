@@ -10,22 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let viewModel = ViewModel()
+    lazy var viewModel = ViewModel(delegate: self)
     var jobs = [Job]()
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.getJobs(closure: { [unowned self] (result) in
-            switch result {
-            case .error(let error):
-                print(error)
-            case .jobs(let jobs):
-                self.jobs = jobs
-                self.tableView.reloadData()
-            }
-        })
+        viewModel.getJobs()
+    }
+}
+
+extension ViewController: ViewModelDelegate {
+
+    func didFinishLoadingWithJobs(_ jobs: [Job]?) {
+        guard let jobs = jobs else { return }
+        self.jobs = jobs
+        tableView.reloadData()
+    }
+
+    func didFailedWithError(_ error: ViewModelError) {
+        print(error)
     }
 }
 
