@@ -8,42 +8,37 @@
 
 import UIKit
 
-protocol ViewModelDelegate {
-    func didFailedWithError(_ error: ViewModelError)
-    func didFinishLoadingWithJobs(_ jobs: [Job]?)
-}
-
 enum ViewModelError: Error {
     case urlError(String)
     case apiClientError(ApiClientError)
 }
 
 final class ViewModel {
-    let delegate: ViewModelDelegate
 
-    lazy var apiClient = ApiClient(delegate: self)
+    typealias Closure = (Result) -> ()
 
-    init(delegate: ViewModelDelegate) {
-        self.delegate = delegate
+    enum Result {
+        case jobs([Job])
+        case error(ViewModelError)
     }
 
-    func getJobs() {
+    let apiClient = ApiClient()
+
+    func getJobs(closure: @escaping Closure) {
         
         guard let url = URL(string: Constants.jobsUrl) else {
-            delegate.didFailedWithError(ViewModelError.urlError("Invalid url"))
+            closure(Result.error(ViewModelError.urlError("Invalid url")))
             return
         }
 
-        apiClient.get(url: url)
-    }
-}
+        apiClient.get(url: url) { (response) in
+            switch response {
+            case .error(let error):
+                closure(Result.error(.apiClientError(error)))
 
-extension ViewModel: ApiClientDelegate {
-    func didFinishLoadingWithJobs(_ jobs: [Job]?) {
-        delegate.didFinishLoadingWithJobs(jobs)
-    }
-
-    func didFailedLoadingWithError(_ error: ApiClientError) {
-
+            case .result(let jobs):
+                closure(Result.jobs(jobs))
+            }
+        }
     }
 }

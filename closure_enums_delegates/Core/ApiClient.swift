@@ -12,11 +12,6 @@ enum Constants {
     static let jobsUrl = "https://jobs.github.com/positions.json"
 }
 
-protocol ApiClientDelegate {
-    func didFinishLoadingWithJobs(_ jobs: [Job]?)
-    func didFailedLoadingWithError(_ error: ApiClientError)
-}
-
 enum ApiClientError: Error {
     case jsonFormat(String)
     case responseError(String)
@@ -24,20 +19,21 @@ enum ApiClientError: Error {
 
 final class ApiClient {
 
-    let delegate: ApiClientDelegate
+    typealias Closure = (Response) -> ()
 
-    init(delegate: ApiClientDelegate) {
-        self.delegate = delegate
+    enum Response {
+        case result([Job])
+        case error(ApiClientError)
     }
 
-    func get(url: URL) {
+    func get(url: URL, closure: @escaping Closure) {
 
         let request = URLRequest(url: url)
 
-        URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             guard let data = data, error == nil else {
                 DispatchQueue.main.async {
-                    self?.delegate.didFailedLoadingWithError(ApiClientError.responseError("Generic Error"))
+                    closure(Response.error(ApiClientError.responseError("Generic Error")))
                 }
                 return
             }
@@ -46,13 +42,13 @@ final class ApiClient {
                 let jobs = try JSONDecoder().decode([Job].self, from: data)
 
                 DispatchQueue.main.async {
-                    self?.delegate.didFinishLoadingWithJobs(jobs)
+                    closure(Response.result(jobs))
                 }
 
                 } catch let error {
 
                 DispatchQueue.main.async {
-                    self?.delegate.didFailedLoadingWithError(ApiClientError.jsonFormat(error.localizedDescription))
+                    closure(Response.error(.jsonFormat(error.localizedDescription)))
                 }
             }
             }.resume()
