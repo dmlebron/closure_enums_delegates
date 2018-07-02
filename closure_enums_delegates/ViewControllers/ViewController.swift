@@ -46,6 +46,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = jobs[indexPath.row].company
+        cell.detailTextLabel?.text = "Location: \(jobs[indexPath.row].location)"
         return cell
     }
 }
